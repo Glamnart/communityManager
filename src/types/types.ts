@@ -64,3 +64,13 @@ export interface VolunteerAction {
   note: string;
   createdAt: string;
 }
+
+export abstract class CommunityRecord {
+    constructor(
+        public id: string,
+        public createdAt: string
+    ){}
+
+    abstract getSummary(): string
+}
+

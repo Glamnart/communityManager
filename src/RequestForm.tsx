@@ -17,14 +17,12 @@ const initialFormState: RequestFormData = {
   contactValue: "",
 };
 
-const RequestForm = ({ onSubmit }: RequestFormProps) => {
+ const RequestForm = ({ onSubmit }: RequestFormProps) => {
   const [formData, setFormData] = useState<RequestFormData>(initialFormState);
   const [errors, setErrors] = useState<Partial<Record<keyof RequestFormData, string>>>({});
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent< HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement >
   ) => {
     const { name, value } = e.target;
 
@@ -69,51 +67,49 @@ const RequestForm = ({ onSubmit }: RequestFormProps) => {
     // 4. Pass to parent
     onSubmit(newRequest);
 
-    // 5. Reset form
+    // 5. Reset formborder-color: #007bff;
     setFormData(initialFormState);
   };
 
   return (
     <form onSubmit={handleSubmit} className="request-form">
      
-      <div>
+      <div className="form-group">
         <label>Title</label>
-        <input
+        <input className="form-input"
           type="text"
           name="title"
           value={formData.title}
-          onChange={handleChange}
-        />
+          onChange={handleChange} />
         {errors.title && <span className="error">{errors.title}</span>}
       </div>
 
   
       <div className="form-group">
         <label>Description</label>
-        <textarea
+        <textarea className="form-input"
           name="description"
           value={formData.description}
-          onChange={handleChange}
-        />
+          onChange={handleChange}/>
         {errors.description && <span className="error">{errors.description}</span>}
       </div>
 
      
       <div className="form-group">
         <label>Requester Name</label>
-        <input
+        <input className="form-input"
           type="text"
           name="requesterName"
           value={formData.requesterName}
-          onChange={handleChange}
-        />
+          onChange={handleChange}/>
         {errors.requesterName && <span className="error">{errors.requesterName}</span>}
       </div>
 
     
       <div className="form-group">
         <label>Contact Method</label>
-        <select className="form-input" name="contactMethod"
+        <select className="form-input" 
+          name="contactMethod"
           value={formData.contactMethod}
           onChange={handleChange}>
           <option value="phone">Phone</option>
@@ -127,7 +123,8 @@ const RequestForm = ({ onSubmit }: RequestFormProps) => {
    
       <div className="form-group">
         <label>Contact Value</label>
-        <input type="text"
+        <input className="form-input"
+        type="text"
           name="contactValue"
           value={formData.contactValue}
           onChange={handleChange} />
@@ -165,7 +162,7 @@ const RequestForm = ({ onSubmit }: RequestFormProps) => {
         {errors.urgency && <span className="error">{errors.urgency}</span>}
       </div>
 
-      <button type="submit">Submit Request</button>
+      <button type="submit" className="submit-btn">Submit Request</button>
     </form>
   );
 };

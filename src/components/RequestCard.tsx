@@ -1,4 +1,5 @@
 import type { SupportRequest, RequestStatus } from "../types/types";
+
 type Props = {
   request: SupportRequest;
   onDelete: (id: string) => void;

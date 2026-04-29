@@ -21,14 +21,12 @@ function App() {
     },
   ]);
 
-  // ✅ Uses util function
   const handleStatusUpdate = (id: string, status: RequestStatus) => {
     setRequests((prev) =>
       updateRequestStatus(prev, id, status)
     );
   };
 
-  // ✅ Uses util function
   const handleDelete = (id: string) => {
     setRequests((prev) =>
       deleteRequest(prev, id)

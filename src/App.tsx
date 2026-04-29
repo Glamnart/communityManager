@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import type { SupportRequest, RequestStatus } from "./types/types";
 import RequestCard from './components/RequestCard';
+import { updateRequestStatus, deleteRequest } from "./utils/requestHandlers";
 
 function App() {
   const [requests, setRequests] = useState<SupportRequest[]>([
@@ -20,17 +21,17 @@ function App() {
     },
   ]);
 
+  // ✅ Uses util function
   const handleStatusUpdate = (id: string, status: RequestStatus) => {
     setRequests((prev) =>
-      prev.map((req) =>
-        req.id === id ? { ...req, status } : req
-      )
+      updateRequestStatus(prev, id, status)
     );
   };
 
+  // ✅ Uses util function
   const handleDelete = (id: string) => {
     setRequests((prev) =>
-      prev.filter((req) => req.id !== id)
+      deleteRequest(prev, id)
     );
   };
 

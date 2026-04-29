@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import './App.css'
+import './App.css';
 import type { SupportRequest, RequestStatus } from "./types/types";
-import RequestCard from './components/RequestCard'
+import RequestCard from './components/RequestCard';
+
 function App() {
   const [requests, setRequests] = useState<SupportRequest[]>([
     {
@@ -18,6 +19,7 @@ function App() {
       updatedAt: new Date().toISOString(),
     },
   ]);
+
   const handleStatusUpdate = (id: string, status: RequestStatus) => {
     setRequests((prev) =>
       prev.map((req) =>
@@ -31,40 +33,25 @@ function App() {
       prev.filter((req) => req.id !== id)
     );
   };
-  return (
-  <div>
-    <h1>Community Support Desk</h1>
 
-    {requests.length === 0 ? (
-      <p>No requests available</p>
-    ) : (
-      requests.map((req) => (
-        <RequestCard
-          key={req.id}
-          request={req}
-          onDelete={handleDelete}
-          onUpdateStatus={handleStatusUpdate}
-        />
-      ))
-    )}
-  </div>
+  return (
+    <div>
+      <h1>Community Support Desk</h1>
+
+      {requests.length === 0 ? (
+        <p>No requests available</p>
+      ) : (
+        requests.map((req) => (
+          <RequestCard
+            key={req.id}
+            request={req}
+            onDelete={handleDelete}
+            onUpdateStatus={handleStatusUpdate}
+          />
+        ))
+      )}
+    </div>
   );
-  return (
-  <div>
-    <h1>Community Support Desk</h1>
-    <p>TEST TEXT</p>
-
-    {requests.map((req) => (
-      <RequestCard
-        key={req.id}
-        request={req}
-        onDelete={handleDelete}
-        onUpdateStatus={handleStatusUpdate}
-      />
-    ))}
-  </div>
-);
-
 }
 
 export default App;

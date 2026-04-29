@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./RequestForm.css";
 import { generateId, validateRequestForm, type RequestFormData } from "./utils/validation";
 import type { ContactMethod, SupportCategory, SupportRequest, UrgencyLevel } from "./types/types";
 

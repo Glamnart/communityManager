@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RequestList } from "./components/RequestList";
 import type { SupportRequest } from "./types/types";
+import './App.css'
 
 const App: React.FC = () => {
   const [requests, setRequests] = useState<SupportRequest[]>([]);

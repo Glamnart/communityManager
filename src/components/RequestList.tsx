@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { RequestCard } from "./RequestCard";
-import { RequestFilters, RequestFiltersType } from "./RequestFilters";
-import { searchRequests, filterRequests } from "../utils/requestUtils";
+import { RequestFilters } from "./RequestFilters";
+import type { RequestFiltersType } from "./RequestFilters";
+import { filterRequests } from "../utils/RequestFilters";
+import { searchRequests } from "../utils/RequestSearch";
 import type {
   SupportRequest,
   RequestStatus,
@@ -23,7 +25,14 @@ export const RequestList: React.FC<RequestListProps> = ({
   }, [requests]);
 
   const handleFilter = (filters: RequestFiltersType): void => {
-    setFiltered(filterRequests(requests, filters));
+    setFiltered(
+      filterRequests(
+        requests,
+        filters.category,
+        filters.urgency,
+        filters.status
+      )
+    );
   };
 
   const handleSearch = (query: string): void => {

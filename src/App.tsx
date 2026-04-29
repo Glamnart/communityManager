@@ -1,10 +1,21 @@
-// import { useState } from 'react'
+import React, { useState } from "react";
+import { RequestList } from "./components/RequestList";
+import type { SupportRequest } from "./types/types";
 import './App.css'
 
-function App(){
-  return <div>
+const App: React.FC = () => {
+  const [requests, setRequests] = useState<SupportRequest[]>([]);
 
-  </div>
-}
+  return (
+    <div>
+      <h1>Community Support Desk</h1>
 
-export default App
+      <RequestList
+        requests={requests}
+        setRequests={setRequests}
+      />
+    </div>
+  );
+};
+
+export default App;

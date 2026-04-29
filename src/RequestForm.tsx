@@ -73,8 +73,8 @@ const RequestForm = ({ onSubmit }: RequestFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Title */}
+    <form onSubmit={handleSubmit} className="request-form">
+     
       <div>
         <label>Title</label>
         <input
@@ -87,7 +87,7 @@ const RequestForm = ({ onSubmit }: RequestFormProps) => {
       </div>
 
   
-      <div>
+      <div className="form-group">
         <label>Description</label>
         <textarea
           name="description"
@@ -98,7 +98,7 @@ const RequestForm = ({ onSubmit }: RequestFormProps) => {
       </div>
 
      
-      <div>
+      <div className="form-group">
         <label>Requester Name</label>
         <input
           type="text"
@@ -110,13 +110,11 @@ const RequestForm = ({ onSubmit }: RequestFormProps) => {
       </div>
 
     
-      <div>
+      <div className="form-group">
         <label>Contact Method</label>
-        <select
-          name="contactMethod"
+        <select className="form-input" name="contactMethod"
           value={formData.contactMethod}
-          onChange={handleChange}
-        >
+          onChange={handleChange}>
           <option value="phone">Phone</option>
           <option value="whatsapp">WhatsApp</option>
           <option value="email">Email</option>
@@ -126,25 +124,21 @@ const RequestForm = ({ onSubmit }: RequestFormProps) => {
       </div>
 
    
-      <div>
+      <div className="form-group">
         <label>Contact Value</label>
-        <input
-          type="text"
+        <input type="text"
           name="contactValue"
           value={formData.contactValue}
-          onChange={handleChange}
-        />
+          onChange={handleChange} />
         {errors.contactValue && <span className="error">{errors.contactValue}</span>}
       </div>
 
-      
-      <div>
+      <div className="form-group">
         <label>Category</label>
-        <select
+        <select className="form-input"
           name="category"
           value={formData.category}
-          onChange={handleChange}
-        >
+          onChange={handleChange}>
           <option value="food">Food</option>
           <option value="health">Health</option>
           <option value="education">Education</option>
@@ -156,14 +150,12 @@ const RequestForm = ({ onSubmit }: RequestFormProps) => {
         {errors.category && <span className="error">{errors.category}</span>}
       </div>
 
-  
-      <div>
+      <div className="form-group">
         <label>Urgency</label>
-        <select
+        <select className="form-input"
           name="urgency"
           value={formData.urgency}
-          onChange={handleChange}
-        >
+          onChange={handleChange}>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>

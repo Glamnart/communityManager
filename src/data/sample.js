@@ -1,4 +1,4 @@
-export const SampleData = [{id: "1",
+export const RequestsSampleData = [{id: "1",
     title: "Need food support",
     description: "I need help with food supplies",
     category: "food",

@@ -4,6 +4,9 @@ import { RequestFilters } from "./RequestFilters";
 import type { RequestFiltersType } from "./RequestFilters";
 import { filterRequests } from "../utils/RequestFilters";
 import { searchRequests } from "../utils/RequestSearch";
+// import { calculateRequestCounts } from "../utils/RequestCount";
+// the comment above is for the counts feature which is currently not implemented in the UI, but the logic is there in case we want to add it later.
+
 import type {
   SupportRequest,
   RequestStatus,
@@ -63,6 +66,7 @@ export const RequestList: React.FC<RequestListProps> = ({
     setFiltered(updated);
     localStorage.setItem("requests", JSON.stringify(updated));
   };
+  // const counts = calculateRequestCounts(filtered);
 
   return (
     <div>
@@ -70,6 +74,15 @@ export const RequestList: React.FC<RequestListProps> = ({
         onFilterChange={handleFilter}
         onSearch={handleSearch}
       />
+
+      {/* <div className="mb-4 p-3 border rounded">
+        <p>Total: {counts.total}</p>
+        <p>Open: {counts.open}</p>
+        <p>In Progress: {counts.inProgress}</p>
+        <p>Resolved: {counts.resolved}</p>
+        <p>Rejected: {counts.rejected}</p>
+        <p>Critical: {counts.critical}</p>
+      </div> */}
 
       {filtered.map((req) => (
         <RequestCard

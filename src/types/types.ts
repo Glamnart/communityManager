@@ -1,5 +1,3 @@
-// import ResourceForm from "./ResourceForm";
-
 export type SupportCategory = "food"
   | "health"
   | "education"

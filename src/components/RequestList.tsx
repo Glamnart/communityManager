@@ -23,23 +23,33 @@ export const RequestList: React.FC<RequestListProps> = ({
 }) => {
   const [filtered, setFiltered] = useState<SupportRequest[]>([]);
 
-  useEffect(() => {
-    setFiltered(requests);
-  }, [requests]);
+  const [filters, setFilters] = useState<RequestFiltersType>({
+    category: "all",
+    urgency: "all",
+    status: "all",
+  });
 
-  const handleFilter = (filters: RequestFiltersType): void => {
-    setFiltered(
-      filterRequests(
-        requests,
-        filters.category,
-        filters.urgency,
-        filters.status
-      )
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  useEffect(() => {
+    let result = filterRequests(
+      requests,
+      filters.category,
+      filters.urgency,
+      filters.status
     );
+
+    result = searchRequests(result, searchTerm);
+
+    setFiltered(result);
+  }, [requests, filters, searchTerm]);
+
+  const handleFilter = (newFilters: RequestFiltersType): void => {
+    setFilters(newFilters);
   };
 
   const handleSearch = (query: string): void => {
-    setFiltered(searchRequests(requests, query));
+    setSearchTerm(query);
   };
 
   const handleStatusChange = (
@@ -53,7 +63,6 @@ export const RequestList: React.FC<RequestListProps> = ({
     );
 
     setRequests(updated);
-    setFiltered(updated);
     localStorage.setItem("requests", JSON.stringify(updated));
   };
 
@@ -63,7 +72,6 @@ export const RequestList: React.FC<RequestListProps> = ({
     );
 
     setRequests(updated);
-    setFiltered(updated);
     localStorage.setItem("requests", JSON.stringify(updated));
   };
   // const counts = calculateRequestCounts(filtered);

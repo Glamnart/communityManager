@@ -1,11 +1,16 @@
-import type { SupportRequest } from "../types/types";
+import type {
+  SupportRequest,
+  SupportCategory,
+  UrgencyLevel,
+  RequestStatus,
+} from "../types/types";
 
 // Filters support requests based on category, urgency, and status.
 export function filterRequests(
   requests: SupportRequest[],
-  category: string,
-  urgency: string,
-  status: string
+  category: SupportCategory | "all",
+  urgency: UrgencyLevel | "all",
+  status: RequestStatus | "all"
 ): SupportRequest[] {
   return requests.filter((request) => {
 

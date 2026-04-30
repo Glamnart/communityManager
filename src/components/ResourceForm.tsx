@@ -1,29 +1,18 @@
-// import React from 'react'
 
-
-
-
-// function ResourceForm() {
-//   return (
-//     <div>ResourceForm</div>
-//   )
-// }
-
-// export default ResourceForm;
-
-
-import React, { useState } from "react";
+import React, { useState } from "react";  
+import type { ResourceType } from "../types/types";
+import ResourceList from "./ResourceList";
 
 // Your union type
-type ResourceType =
-  | "food-item"
-  | "medicine"
-  | "clothing"
-  | "book"
-  | "equipment"
-  | "money"
-  | "service"
-  | "other";
+// type ResourceType =
+//   | "food-item"
+//   | "medicine"
+//   | "clothing"
+//   | "book"
+//   | "equipment"
+//   | "money"
+//   | "service"
+//   | "other";
 
 // Form data type
 type ResourceFormData = {
@@ -39,6 +28,9 @@ const ResourceForm: React.FC = () => {
     type: "other",
   });
 
+    const [lists, setLists] = useState<ResourceFormData[]>([]);
+
+
   const [submitted, setSubmitted] = useState<ResourceFormData | null>(null);
 
   // Handle input changes
@@ -50,6 +42,7 @@ const ResourceForm: React.FC = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: name === "quantity" ? Number(value) : value,
+      
     }));
   };
 
@@ -57,6 +50,7 @@ const ResourceForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(formData);
+    setLists((prev) => [...prev, formData]);
 
     // Reset form
     setFormData({
@@ -115,6 +109,7 @@ const ResourceForm: React.FC = () => {
           <p><strong>Type:</strong> {submitted.type}</p>
         </div>
       )}
+      <ResourceList lists = { lists } />
     </div>
   );
 };

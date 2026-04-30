@@ -1,38 +1,63 @@
-import type { SupportRequest, RequestStatus } from "../types/types";
+import React, {} from "react";
 
-type Props = {
+import type {
+  SupportRequest,
+  RequestStatus,
+} from "../types/types";
+
+interface RequestCardProps {
   request: SupportRequest;
+  onStatusChange: (id: string, status: RequestStatus) => void;
   onDelete: (id: string) => void;
-  onUpdateStatus: (id: string, status: RequestStatus) => void;
-};
+}
 
-export default function RequestCard({
+export const RequestCard: React.FC<RequestCardProps> = ({
   request,
+  onStatusChange,
   onDelete,
-  onUpdateStatus,
-}: Props) {
+}) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value as RequestStatus;
+    onStatusChange(request.id, value);
+  };
+
   return (
-    <div style={{ border: "1px solid black", padding: "10px", margin: "10px" }}>
-      <h3>{request.title}</h3>
-      <p>{request.description}</p>
+    <div className="border p-4 rounded-2xl shadow-sm mb-3">
+      <h3 className="text-lg font-semibold">{request.title}</h3>
+      <p className="text-sm text-gray-600">{request.description}</p>
 
-      <p>Status: {request.status}</p>
+      <div className="text-sm mt-2">
+        <span>Category: {request.category}</span> |{" "}
+        <span>Urgency: {request.urgency}</span> |{" "}
+        <span>Status: {request.status}</span>
+      </div>
 
-      <select
-        value={request.status}
-        onChange={(e) =>
-          onUpdateStatus(request.id, e.target.value as RequestStatus)
-        }
-      >
-        <option value="open">Open</option>
-        <option value="in-progress">In Progress</option>
-        <option value="resolved">Resolved</option>
-        <option value="rejected">Rejected</option>
-      </select>
+      <div className="mt-2 text-sm">
+        <p>Requester: {request.requesterName}</p>
+        <p>
+          Contact: {request.contactMethod} - {request.contactValue}
+        </p>
+      </div>
 
-      <button onClick={() => onDelete(request.id)}>
-        Delete
-      </button>
+      <div className="mt-3 flex gap-2">
+        <select
+          value={request.status}
+          onChange={handleChange}
+          className="border p-1 rounded"
+        >
+          <option value="open">open</option>
+          <option value="in-progress">in-progress</option>
+          <option value="resolved">resolved</option>
+          <option value="rejected">rejected</option>
+        </select>
+
+        <button
+          onClick={() => onDelete(request.id)}
+          className="bg-red-500 text-white px-2 rounded"
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
-}
+};

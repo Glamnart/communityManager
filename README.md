@@ -512,6 +512,12 @@ src/
 npm install
 ```
 
+### Install Tailwind CSS
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
 ### Start Development Server
 
 ```bash

@@ -1,9 +1,5 @@
-// import React, { useState } from "react";  
-// import type { ResourceType } from "../types/types";
+import React from "react";
 import type { ResourceOffer } from "../types/types";
-
-
-
 
 interface ResourceOfferListProps {
   offers: ResourceOffer[];
@@ -19,7 +15,9 @@ const ResourceOfferList: React.FC<ResourceOfferListProps> = ({
   }
 
   return (
-    <div>
+    <section>
+      <h2>Available Resource Offers</h2>
+      <div style={{ marginTop: "16px" }}>
       {offers.map((offer) => (
         <div
           key={offer.id}
@@ -60,7 +58,8 @@ const ResourceOfferList: React.FC<ResourceOfferListProps> = ({
           )}
         </div>
       ))}
-    </div>
+      </div>
+    </section>
   );
 };
 

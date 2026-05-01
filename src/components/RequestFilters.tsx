@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import type { RequestStatus } from "../types/types";
-import type { SupportCategory, UrgencyLevel } from "../types/types";
+import type { RequestStatus, SupportCategory, UrgencyLevel } from "../types/types";
+
+const supportCategories : SupportCategory[] = ["food","health","education","transport","employment","emergency","shelter","clothing","other"];
+const urgencyLevels : UrgencyLevel[] = ["low","medium","high","critical"];
+const requestStatuses : RequestStatus[] = ["open","in-progress","resolved","rejected"];
 
 export interface RequestFiltersType {
   category: SupportCategory | "all";
@@ -38,20 +41,17 @@ export const RequestFilters: React.FC<Props> = ({
 
       <select onChange={(e) => handleChange("category", e.target.value as SupportCategory | "all")}>
         <option value="all">All Categories</option>
-        <option value="food">food</option>
-        <option value="health">health</option>
+        {supportCategories.map((category)=><option value={category}>{category.charAt(0).toUpperCase() + category.slice(1)}</option>)}
       </select>
 
       <select onChange={(e) => handleChange("urgency", e.target.value as UrgencyLevel | "all")}>
         <option value="all">All Urgency</option>
-        <option value="low">low</option>
-        <option value="high">high</option>
+        {urgencyLevels.map((level)=><option value={level}>{level.charAt(0).toUpperCase() + level.slice(1)}</option>)}
       </select>
 
       <select onChange={(e) => handleChange("status", e.target.value as RequestStatus | "all")}>
         <option value="all">All Status</option>
-        <option value="open">open</option>
-        <option value="resolved">resolved</option>
+        {requestStatuses.map((status)=><option value={status}>{status.charAt(0).toUpperCase() + status.slice(1)}</option>)}
       </select>
     </div>
   );

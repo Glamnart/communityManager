@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { RequestCard } from "./RequestCard";
 import { RequestFilters } from "./RequestFilters";
 import type { RequestFiltersType } from "./RequestFilters";
@@ -21,7 +21,7 @@ export const RequestList: React.FC<RequestListProps> = ({
   requests,
   setRequests,
 }) => {
-  const [filtered, setFiltered] = useState<SupportRequest[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const [filters, setFilters] = useState<RequestFiltersType>({
     category: "all",
@@ -29,20 +29,15 @@ export const RequestList: React.FC<RequestListProps> = ({
     status: "all",
   });
 
-  const [searchTerm, setSearchTerm] = useState<string>("");
-
-  useEffect(() => {
-    let result = filterRequests(
-      requests,
-      filters.category,
-      filters.urgency,
-      filters.status
-    );
-
-    result = searchRequests(result, searchTerm);
-
-    setFiltered(result);
-  }, [requests, filters, searchTerm]);
+ const filtered = searchRequests(
+  filterRequests(
+    requests,
+    filters.category,
+    filters.urgency,
+    filters.status
+  ),
+  searchTerm
+);
 
   const handleFilter = (newFilters: RequestFiltersType): void => {
     setFilters(newFilters);
@@ -74,7 +69,6 @@ export const RequestList: React.FC<RequestListProps> = ({
   );
 
   setRequests(updated);
-  setFiltered(updated);
   localStorage.setItem("requests", JSON.stringify(updated));
 };
 // const counts = calculateRequestCounts(filtered);

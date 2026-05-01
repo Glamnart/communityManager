@@ -10,7 +10,7 @@ import type {
   SupportRequest,
   VolunteerAction,
 } from "./types/types";
-import { RequestsSampleData } from "./data/sample.js";
+import { RequestsSampleData } from "./data/sample.ts";
 import {
   loadRequests,
   loadResourceOffers,

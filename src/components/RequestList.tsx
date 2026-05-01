@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RequestCard } from "./RequestCard";
 import { RequestFilters } from "./RequestFilters";
 import type { RequestFiltersType } from "./RequestFilters";
@@ -29,6 +29,10 @@ export const RequestList: React.FC<RequestListProps> = ({
     status: "all",
   });
 
+   useEffect(() => {
+    localStorage.setItem("requests", JSON.stringify(requests));
+  }, [requests]);
+
  const filtered = searchRequests(
   filterRequests(
     requests,
@@ -37,7 +41,7 @@ export const RequestList: React.FC<RequestListProps> = ({
     filters.status
   ),
   searchTerm
-);
+  );
 
   const handleFilter = (newFilters: RequestFiltersType): void => {
     setFilters(newFilters);
@@ -58,20 +62,13 @@ export const RequestList: React.FC<RequestListProps> = ({
     );
 
     setRequests(updated);
-    localStorage.setItem("requests", JSON.stringify(updated));
   };
 
   const handleDelete = (id: string): void => {
-  const updated: SupportRequest[] = requests.map((req) =>
-    req.id === id
-      ? { ...req, status: "rejected", updatedAt: new Date().toISOString() }
-      : req
-  );
-
+  const updated = requests.filter((req) => req.id !== id);
   setRequests(updated);
-  localStorage.setItem("requests", JSON.stringify(updated));
-};
-// const counts = calculateRequestCounts(filtered);
+  };
+  // const counts = calculateRequestCounts(filtered);
 
   return (
     <div>

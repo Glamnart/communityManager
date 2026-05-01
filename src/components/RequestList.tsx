@@ -21,7 +21,7 @@ export const RequestList: React.FC<RequestListProps> = ({
   requests,
   setRequests,
 }) => {
-  const [filtered, setFiltered] = useState<SupportRequest[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const [filters, setFilters] = useState<RequestFiltersType>({
     category: "all",
@@ -29,20 +29,19 @@ export const RequestList: React.FC<RequestListProps> = ({
     status: "all",
   });
 
-  const [searchTerm, setSearchTerm] = useState<string>("");
+   useEffect(() => {
+    localStorage.setItem("requests", JSON.stringify(requests));
+  }, [requests]);
 
-  useEffect(() => {
-    let result = filterRequests(
-      requests,
-      filters.category,
-      filters.urgency,
-      filters.status
-    );
-
-    result = searchRequests(result, searchTerm);
-
-    setFiltered(result);
-  }, [requests, filters, searchTerm]);
+ const filtered = searchRequests(
+  filterRequests(
+    requests,
+    filters.category,
+    filters.urgency,
+    filters.status
+  ),
+  searchTerm
+  );
 
   const handleFilter = (newFilters: RequestFiltersType): void => {
     setFilters(newFilters);
@@ -63,16 +62,11 @@ export const RequestList: React.FC<RequestListProps> = ({
     );
 
     setRequests(updated);
-    localStorage.setItem("requests", JSON.stringify(updated));
   };
 
   const handleDelete = (id: string): void => {
-    const updated: SupportRequest[] = requests.filter(
-      (req) => req.id !== id
-    );
-
-    setRequests(updated);
-    localStorage.setItem("requests", JSON.stringify(updated));
+  const updated = requests.filter((req) => req.id !== id);
+  setRequests(updated);
   };
   // const counts = calculateRequestCounts(filtered);
 
@@ -82,15 +76,6 @@ export const RequestList: React.FC<RequestListProps> = ({
         onFilterChange={handleFilter}
         onSearch={handleSearch}
       />
-
-      {/* <div className="mb-4 p-3 border rounded">
-        <p>Total: {counts.total}</p>
-        <p>Open: {counts.open}</p>
-        <p>In Progress: {counts.inProgress}</p>
-        <p>Resolved: {counts.resolved}</p>
-        <p>Rejected: {counts.rejected}</p>
-        <p>Critical: {counts.critical}</p>
-      </div> */}
 
       {filtered.map((req) => (
         <RequestCard

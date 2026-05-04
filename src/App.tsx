@@ -1,27 +1,24 @@
-
+import React, { useState } from "react";
+import { RequestList } from "./components/RequestList";
+import Header from "./components/Header"
+import type { SupportRequest } from "./types/types";
+import {RequestsSampleData} from "./data/sample.js"
 import './App.css'
 import RequestForm from './RequestForm'
 import type { SupportRequest } from './types/types'
 
-function App() {
-  const handleNewRequest = (newRequest: SupportRequest) => {
-    console.log("New support request submitted:", newRequest);
-    // Save to localStorage
-  }
+const App: React.FC = () => {
+  const [requests, setRequests] = useState<SupportRequest[]>([...RequestsSampleData]);
 
   return (
-    <>
-      <section id="center">
-        <div>
-          <h1>Get started</h1>
-          <RequestForm onSubmit={handleNewRequest} />
-        </div>
-      </section>
+    <div>
+      <Header/>
+      <RequestList
+        requests={requests}
+        setRequests={setRequests}
+      />
+    </div>
+  );
+};
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
-}
-
-export default App
+export default App;

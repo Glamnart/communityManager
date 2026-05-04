@@ -1,11 +1,6 @@
 
-import React, { useState } from "react";  
-// import type { ResourceType } from "../types/types";
-// import ResourceList from "./ResourceList";
+import React, { useState } from "react";
 import type { ResourceOffer } from "../types/types";
-
-
-
 
 interface FormProps {
   onAdd: (offer: ResourceOffer) => void;
@@ -21,8 +16,6 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
     contactValue: "",
     isAvailable: true,
   });
-
-  const [lists, setLists] = useState<ResourceOffer[]>([]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -46,11 +39,6 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
       id: crypto.randomUUID(),
       createdAt: new Date().toISOString(),
     };
-
-    // add to local list
-    setLists((prev) => [...prev, newOffer]);
-
-    // send to parent
     onAdd(newOffer);
 
     // reset form
@@ -66,13 +54,26 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
   };
 
   return (
-    <form className="m-4 flex" onSubmit={handleSubmit}>
-      <input
-        name="title"
-        value={form.title}
-        onChange={handleChange}
-        placeholder="Title"
-      />
+    <section
+      style={{
+        border: "1px solid #d1d5db",
+        borderRadius: "12px",
+        padding: "20px",
+        marginBottom: "24px",
+      }}
+    >
+      <h2>Add Resource Offer</h2>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "grid", gap: "12px", marginTop: "16px" }}
+      >
+        <input
+          name="title"
+          value={form.title}
+          onChange={handleChange}
+          placeholder="Title"
+          required
+        />
 
       <textarea
         className="mx-4"
@@ -113,39 +114,31 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
         <option value="other">Other</option>
       </select>
 
-      <select
-        className="mx-4"
-        name="contactMethod"
-        value={form.contactMethod}
-        onChange={handleChange}
-      >
-        <option value="phone">Phone</option>
-        <option value="email">Email</option>
-      </select>
-
-      <label>
-        Available:
-        <input
-          className="mx-2"
-          type="checkbox"
-          name="isAvailable"
-          checked={form.isAvailable}
+        <select
+          className="mx-4"
+          name="contactMethod"
+          value={form.contactMethod}
           onChange={handleChange}
-        />
-      </label>
+        >
+          <option value="phone">Phone</option>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="email">Email</option>
+          <option value="in-person">In Person</option>
+        </select>
 
-      <button type="submit">Add Offer</button>
+        <label style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+          <input
+            type="checkbox"
+            name="isAvailable"
+            checked={form.isAvailable}
+            onChange={handleChange}
+          />
+          Available now
+        </label>
 
-      {/* Display list */}
-      {lists.map((item) => (
-        <div key={item.id}>
-          <h3>{item.title}</h3>
-          <p>{item.description}</p>
-          <p>{item.offeredBy}</p>
-          <p>{item.contactValue}</p>
-        </div>
-      ))}
-    </form>
+        <button type="submit">Add Offer</button>
+      </form>
+    </section>
   );
 };
 

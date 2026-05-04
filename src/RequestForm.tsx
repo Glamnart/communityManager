@@ -73,93 +73,119 @@ const initialFormState: RequestFormData = {
 
   return (
     <form onSubmit={handleSubmit} className="request-form">
-     
       <div className="form-group">
-        <label>Title</label>
-        <input className="form-input"
+        <label>Request Title</label>
+        <input
+          className="form-input"
           type="text"
           name="title"
           value={formData.title}
-          onChange={handleChange} />
+          onChange={handleChange}
+          placeholder="Brief title of your request"
+        />
         {errors.title && <span className="error">{errors.title}</span>}
       </div>
 
-  
       <div className="form-group">
         <label>Description</label>
-        <textarea className="form-input"
+        <textarea
+          className="form-input"
           name="description"
           value={formData.description}
-          onChange={handleChange}/>
+          onChange={handleChange}
+          placeholder="Provide details about your request"
+        />
         {errors.description && <span className="error">{errors.description}</span>}
       </div>
 
-     
+      <div className="form-row">
+        <div className="form-group">
+          <label>Category</label>
+          <select
+            className="form-input"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+          >
+            <option value="" disabled hidden>
+              Select a category
+            </option>
+            <option value="food">Food</option>
+            <option value="health">Health</option>
+            <option value="education">Education</option>
+            <option value="transport">Transport</option>
+            <option value="employment">Employment</option>
+            <option value="emergency">Emergency</option>
+            <option value="other">Other</option>
+          </select>
+          {errors.category && <span className="error">{errors.category}</span>}
+        </div>
+
+        <div className="form-group">
+          <label>Urgency</label>
+          <select
+            className="form-input"
+            name="urgency"
+            value={formData.urgency}
+            onChange={handleChange}
+          >
+            <option value="" disabled hidden>
+              Select urgency level
+            </option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+          {errors.urgency && <span className="error">{errors.urgency}</span>}
+        </div>
+      </div>
+
       <div className="form-group">
-        <label>Requester Name</label>
-        <input className="form-input"
+        <label>Your Name</label>
+        <input
+          className="form-input"
           type="text"
           name="requesterName"
           value={formData.requesterName}
-          onChange={handleChange}/>
+          onChange={handleChange}
+          placeholder="Full name"
+        />
         {errors.requesterName && <span className="error">{errors.requesterName}</span>}
       </div>
 
-    
-      <div className="form-group">
-        <label>Contact Method</label>
-        <select className="form-input" 
-          name="contactMethod"
-          value={formData.contactMethod}
-          onChange={handleChange}>
-          <option value="phone">Phone</option>
-          <option value="whatsapp">WhatsApp</option>
-          <option value="email">Email</option>
-          <option value="in-person">In-person</option>
-        </select>
-        {errors.contactMethod && <span className="error">{errors.contactMethod}</span>}
-      </div>
+      <div className="form-row">
+        <div className="form-group">
+          <label>Contact Method</label>
+          <select
+            className="form-input"
+            name="contactMethod"
+            value={formData.contactMethod}
+            onChange={handleChange}
+          >
+            <option value="" disabled hidden>
+              Select contact method
+            </option>
+            <option value="phone">Phone</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="email">Email</option>
+            <option value="in-person">In-person</option>
+          </select>
+          {errors.contactMethod && <span className="error">{errors.contactMethod}</span>}
+        </div>
 
-   
-      <div className="form-group">
-        <label>Contact Value</label>
-        <input className="form-input"
-        type="text"
-          name="contactValue"
-          value={formData.contactValue}
-          onChange={handleChange} />
-        {errors.contactValue && <span className="error">{errors.contactValue}</span>}
-      </div>
-
-      <div className="form-group">
-        <label>Category</label>
-        <select className="form-input"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}>
-          <option value="food">Food</option>
-          <option value="health">Health</option>
-          <option value="education">Education</option>
-          <option value="transport">Transport</option>
-          <option value="employment">Employment</option>
-          <option value="emergency">Emergency</option>
-          <option value="other">Other</option>
-        </select>
-        {errors.category && <span className="error">{errors.category}</span>}
-      </div>
-
-      <div className="form-group">
-        <label>Urgency</label>
-        <select className="form-input"
-          name="urgency"
-          value={formData.urgency}
-          onChange={handleChange}>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-          <option value="critical">Critical</option>
-        </select>
-        {errors.urgency && <span className="error">{errors.urgency}</span>}
+        <div className="form-group">
+          <label>Contact Information</label>
+          <input
+            className="form-input"
+            type="text"
+            name="contactValue"
+            value={formData.contactValue}
+            onChange={handleChange}
+            placeholder="Phone, email, or address"
+          />
+          {errors.contactValue && <span className="error">{errors.contactValue}</span>}
+        </div>
       </div>
 
       <button type="submit" className="submit-btn">Submit Request</button>

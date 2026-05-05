@@ -68,6 +68,7 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
         style={{ display: "grid", gap: "12px", marginTop: "16px" }}
       >
         <input
+          className="border-2 border-black-500 p-2 rounded"
           name="title"
           value={form.title}
           onChange={handleChange}
@@ -76,7 +77,7 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
         />
 
       <textarea
-        className="mx-4"
+        className="border-2 border-black-500 p-2 rounded"
         name="description"
         value={form.description}
         onChange={handleChange}
@@ -84,6 +85,7 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
       />
 
       <input
+        className="border-2 border-black-500 p-2 rounded"
         name="offeredBy"
         value={form.offeredBy}
         onChange={handleChange}
@@ -91,7 +93,7 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
       />
 
       <input
-        className="mx-4 my-4"
+        className="border-2 border-black-500 p-2 rounded" 
         name="contactValue"
         value={form.contactValue}
         onChange={handleChange}
@@ -99,7 +101,7 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
       />
 
       <select
-        className="mx-4"
+        className="border-2 border-black-500 p-2 rounded"
         name="resourceType"
         value={form.resourceType}
         onChange={handleChange}
@@ -115,7 +117,7 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
       </select>
 
         <select
-          className="mx-4"
+          className="border-2 border-black-500 p-2 rounded"
           name="contactMethod"
           value={form.contactMethod}
           onChange={handleChange}
@@ -136,7 +138,7 @@ const ResourceOfferForm: React.FC<FormProps> = ({ onAdd }) => {
           Available now
         </label>
 
-        <button type="submit">Add Offer</button>
+        <button type="submit" className="border-2 rounded-lg p-2 bg-blue-500 text-white cursor-pointer">Add Offer</button>
       </form>
     </section>
   );
